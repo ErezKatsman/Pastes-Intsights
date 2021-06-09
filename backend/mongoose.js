@@ -1,8 +1,6 @@
 require("dotenv").config();
-const app = require("./app");
 const mongoose = require("mongoose");
-const MONGO_URI = process.env.MONGO_URI;
-const PORT = process.env.PORT || 8080;
+const MONGO_URI = process.env.MONGO_LOCAL_URI;
 
 mongoose
   .connect(MONGO_URI, {
@@ -13,10 +11,9 @@ mongoose
   })
   .then(() => {
     console.log(`connected to MongoDB`);
-    app.listen(PORT, () =>
-      console.log(`app listening at http://localhost:${PORT}`)
-    );
   })
   .catch((error) => {
     console.log("error connecting to MongoDB:", error.message);
   });
+
+module.exports = { mongoose };

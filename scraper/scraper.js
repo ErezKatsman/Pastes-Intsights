@@ -1,6 +1,8 @@
+require("dotenv").config();
 const tr = require("tor-request");
 const cheerio = require("cheerio");
-// const { match } = require("assert/strict");
+const Pastes = require("./pasteModel");
+const mongoose = require("./mongoose");
 
 function pageScrape(page) {
   return new Promise((resolve, reject) => {
@@ -40,19 +42,36 @@ function getData(btns) {
       tr.request(btn, (error, response, html) => {
         if (!error && response.statusCode == 200) {
           const $ = cheerio.load(html);
+          const _id = btn.match("onion/(.*)")[1];
           const author = $(".col-sm-6").text().match("by (.*) at")[1].trim();
           const title = $("h4").text().trim();
           const content = $(".text").text();
           const date = new Date(
             $(".col-sm-6").text().match("at (.*)\n")[1].trim()
           );
-          resolve({ author, title, content, date });
+          resolve({ _id, author, title, content, date });
+        } else {
+          reject(error);
         }
       });
     });
   });
 }
 
-scrapeAll().then((data) =>
-  Promise.all(getData(data)).then((res) => console.log(res))
-);
+async function getDB() {
+  const scrape = await scrapeAll();
+  const pendingData = await getData(scrape);
+  const data = await Promise.all(pendingData);
+  return data;
+}
+
+// setInterval(() => {
+getDB().then((db) => {
+  console.log("start mongo");
+  Pastes.insertMany(db)
+    .then(() => console.log("the data saved successfully"))
+    .catch((err) =>
+      console.log("there was an error during saving data: " + err.message)
+    );
+});
+// }, 120000);
