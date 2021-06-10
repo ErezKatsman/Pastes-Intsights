@@ -3,6 +3,7 @@ const tr = require("tor-request");
 const cheerio = require("cheerio");
 const Pastes = require("./pasteModel");
 const mongoose = require("./mongoose");
+tr.setTorAddress("tor_proxy");
 
 function pageScrape(page) {
   return new Promise((resolve, reject) => {
@@ -65,7 +66,6 @@ async function getDB() {
   return data;
 }
 
-// setInterval(() => {
 getDB().then((db) => {
   console.log("start mongo");
   Pastes.insertMany(db)
@@ -74,4 +74,14 @@ getDB().then((db) => {
       console.log("there was an error during saving data: " + err.message)
     );
 });
-// }, 120000);
+
+setInterval(() => {
+  getDB().then((db) => {
+    console.log("start mongo");
+    Pastes.insertMany(db)
+      .then(() => console.log("the data saved successfully"))
+      .catch((err) =>
+        console.log("there was an error during saving data: " + err.message)
+      );
+  });
+}, 120000);

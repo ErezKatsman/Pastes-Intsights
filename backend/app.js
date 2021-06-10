@@ -4,9 +4,12 @@ const app = express();
 
 app.use(express.static("client/build"));
 
-app.get("/", async (req, res) => {
-  const db = await Pastes.find({});
-  res.json(db);
+app.get("/", (req, res) => {
+  Pastes.find({})
+    .then((db) => res.json(db))
+    .catch(() =>
+      res.status(404).json({ success: false, message: "No items found" })
+    );
 });
 
 // app.post("/", async (req, res) => {

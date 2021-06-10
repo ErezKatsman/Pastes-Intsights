@@ -1,0 +1,27 @@
+version: "3"
+services:
+  mongo:
+    restart: always
+    container_name: mongo
+    image: mongo
+    ports:
+      - "27017:27017"
+  scraper:
+    restart: always
+    container_name: scraper
+    build: ./scraper
+    depends_on:
+      - tor_proxy
+      - mongo
+  tor_proxy:
+    restart: always
+    container_name: tor_proxy
+    image: dperson/torproxy
+  backend:
+    restart: always
+    container_name: backend
+    build: ./backend
+    ports:
+      - 8080:8080
+    depends_on:
+      - mongo

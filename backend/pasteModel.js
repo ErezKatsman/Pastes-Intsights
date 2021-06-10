@@ -3,11 +3,11 @@ const Schema = mongoose.Schema;
 
 const PasteSchema = new Schema(
   {
-    _id: { type: String, requie: true, unique: true },
-    author: { type: String, requie: true },
-    title: { type: String, requie: true },
-    content: { type: String, requie: true },
-    date: { type: Date, require: true },
+    _id: { type: String, required: true, unique: true },
+    author: { type: String, required: true },
+    title: { type: String, required: true },
+    content: { type: String, required: true },
+    date: { type: Date, required: true },
   },
   { versionKey: false }
 );

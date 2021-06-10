@@ -1,0 +1,14 @@
+FROM node:14
+
+WORKDIR /scraper-app
+
+COPY ./package*.json ./
+
+RUN npm install
+
+COPY . .
+
+ENV MONGO_LOCAL_URI='mongodb://mongo:27017/pastes'
+
+CMD ["npm", "start"]
+

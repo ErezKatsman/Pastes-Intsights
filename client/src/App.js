@@ -1,23 +1,16 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import "./App.css";
+import Pastes from "./components/Pastes";
+import axios from "axios";
 
 function App() {
+  const [pastes, setPastes] = useState([]);
+  axios.get("http://localhost:8080/").then((db) => setPastes(db));
+  console.log(pastes);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="app">
+      <h1>DARK WEB pastes scraper</h1>
+      {pastes && <Pastes pastes={Pastes} />}
     </div>
   );
 }
