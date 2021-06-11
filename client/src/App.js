@@ -5,7 +5,7 @@ import axios from "axios";
 
 function App() {
   const [pastes, setPastes] = useState([]);
-  axios.get("http://localhost:8080/").then((db) => setPastes(db));
+  axios.get("http://localhost:8080/").then((db) => setPastes(db.data));
   console.log(pastes);
   return (
     <div className="app">
