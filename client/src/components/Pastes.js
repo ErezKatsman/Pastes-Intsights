@@ -3,7 +3,7 @@ import Paste from "./Paste";
 
 export default function Pastes({ pastes }) {
   return (
-    <div>
+    <div className="pastes">
       {pastes.map((paste) => (
         <Paste paste={paste} />
       ))}
