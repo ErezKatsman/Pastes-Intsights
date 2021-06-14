@@ -5,7 +5,7 @@ export default function Pastes({ pastes }) {
   return (
     <div className="pastes">
       {pastes.map((paste) => (
-        <Paste paste={paste} />
+        <Paste paste={paste} key={paste._id} />
       ))}
     </div>
   );
