@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./App.css";
 import Pastes from "./components/Pastes";
 import axios from "axios";
@@ -6,12 +6,15 @@ import axios from "axios";
 function App() {
   const [pastes, setPastes] = useState([]);
   const [error, setError] = useState("");
-  axios
+  useEffect(() => {
+    axios
     .get("http://localhost:8080/")
     .then((db) => setPastes(db.data))
     .catch(() => {
       setError("no items found");
-    });
+    },[]);
+  });
+  
   return (
     <div className="app">
       <h1>DARK WEB pastes scraper</h1>
