@@ -12,14 +12,6 @@ app.get("/", (req, res) => {
     );
 });
 
-// app.post("/", async (req, res) => {
-//   await Pastes.insertMany({
-//     author: "erez",
-//     title: "hello",
-//     content: "hello",
-//     date: new Date(),
-//   });
-//   res.send("ok");
-// });
+
 
 module.exports = app;
