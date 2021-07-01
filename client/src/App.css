@@ -5,4 +5,16 @@
 .paste-section {
   background-color: aqua;
   padding: 10px;
+  border: 1px solid;
+  margin: 10px 5px;
+}
+
+.paste-title {
+  font-weight: 700;
+  font-size: x-large;
+  text-align: right;
+}
+
+.content {
+  background-color: yellow;
 }
