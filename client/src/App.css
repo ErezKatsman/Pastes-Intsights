@@ -1,20 +1,32 @@
-.pastes {
-  background-color: red;
+.main-title {
+  text-align: center;
+  font-size: 60px;
+  text-shadow: rgb(105, 105, 105) 3px 1px;
+  color: red;
 }
 
 .paste-section {
-  background-color: aqua;
+  background-color: red;
   padding: 10px;
   border: 1px solid;
-  margin: 10px 5px;
+  margin: 10px 10px;
 }
 
 .paste-title {
   font-weight: 700;
-  font-size: x-large;
-  text-align: right;
+  font-size: 30px;
+  margin-top: 0;
 }
 
 .content {
-  background-color: yellow;
+  font-weight: 750;
+}
+
+.info {
+  border: 2px black solid;
+  padding: 5px 10px;
+}
+
+.bold {
+  font-weight: 700;
 }

@@ -1,22 +1,33 @@
 import React from "react";
 
 export default function Paste({ paste }) {
-  const { author, title, content, date } = paste;
-  const clearLine = (line) => {
-    return line.replace(/\&nbsp;/g, "h");
+  const { _id, author, title, content, date } = paste;
+
+  const formatDate = (dateStr) => {
+    const date = new Date(dateStr);
+    const day = date.getDate();
+    const month = date.getMonth() + 1;
+    const year = date.getFullYear();
+    const hours = date.getHours();
+    const minutes = date.getMinutes();
+    const seconds = date.getSeconds();
+    return `${day}/${month}/${year} ${hours}:${minutes}:${seconds}`;
   };
 
   return (
-    <div className="paste-section">
-      <span className="paste-title">{title}</span> <br />
-      <ul className="content">
-        {content.split("\n").map((line, i) => {
-          if (line) return <li key={i}>{clearLine(line)}</li>;
-        })}
-      </ul>
-      <br />
+    <div className="paste-section" id={_id}>
+      <h2 className="paste-title">{title}</h2>
+      {content.split("\n").map((line, i) => {
+        return (
+          <div className="content" key={`span${i}`}>
+            <span key={`innerSpan${i}`}>{line}</span>
+            <br key={`br${i}`} />
+          </div>
+        );
+      })}
       <span className="info">
-        {author} at {date}
+        <span className="bold">{author}</span> at{" "}
+        <span className="bold">{formatDate(date)}</span>
       </span>
     </div>
   );
