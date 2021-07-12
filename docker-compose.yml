@@ -25,3 +25,9 @@ services:
       - 8080:8080
     depends_on:
       - mongo
+  client:
+    container_name: client-container
+    restart: always
+    build: ./client
+    ports:
+      - "80:3000"
