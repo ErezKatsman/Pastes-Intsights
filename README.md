@@ -8,6 +8,6 @@ This app scrapes all the pastes from onion paste site. This site contains a lot 
 ## Setup & Instrucions
 1. Make sure you have Docker installed. 
 2. Clone this repository
-3. Open the terminak in the repo directory
-4. run docker compose up and wait for the process to finish.
+3. Open the terminal in the repo directory
+4. run `docker compose up` and wait for the process to finish.
 5. In your browser, go to http://localhost/. Enjoy :)
